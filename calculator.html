@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Calculator</title>
+<link rel="stylesheet" href="calculator.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="calculator-container">
+<div class="mode-switch-section">
+<label>
+<input type="radio" name="mode" value="voice" checked>
+Voice mode
+</label>
+<label>
+<input type="radio" name="mode" value="ai">
+AI mode
+</label>
+<label>
+<input type="radio" name="mode" value="calculator">
+Calculator
+</label>
+</div>
+
+<div id="voice-section" class="voice-section">
+<div class="voice-controls">
+<button id="voice-btn" class="voice-btn" aria-label="Start voice input">
+<span class="mic-icon">🎤</span>
+</button>
+<div id="voice-text" class="voice-text" placeholder="Speak - What is 20 divide by 3?"></div>
+</div>
+<div id="voice-status" class="voice-status"></div>
+</div>
+
+<form id="ai-form" autocomplete="off" class="ai-section">
+<input type="text" id="ai-input" class="ai-input" placeholder="e.g. What is 15% of 200?" />
+<button type="submit" class="ai-btn">Ask</button>
+</form>
+
+<div class="calculator" id="calculator-main">
+<div class="header">
+<h1 class="title">Calculator</h1>
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+<span class="toggle-track">
+<span class="toggle-thumb">
+<span class="theme-icon" aria-hidden="true"></span>
+</span>
+</span>
+</button>
+</div>
+<div class="display-container">
+<div class="previous-operation" id="previous-operation"></div>
+<div class="current-operation" id="current-operation">0</div>
+</div>
+<div class="buttons-grid">
+<button class="btn clear" data-action="clear">AC</button>
+<button class="btn clear" data-action="delete">⌫</button>
+<button class="btn operator" data-value="%">%</button>
+<button class="btn operator" data-value="/">÷</button>
+<button class="btn number" data-value="7">7</button>
+<button class="btn number" data-value="8">8</button>
+<button class="btn number" data-value="9">9</button>
+<button class="btn operator" data-value="*">×</button>
+<button class="btn number" data-value="4">4</button>
+<button class="btn number" data-value="5">5</button>
+<button class="btn number" data-value="6">6</button>
+<button class="btn operator" data-value="-">−</button>
+<button class="btn number" data-value="1">1</button>
+<button class="btn number" data-value="2">2</button>
+<button class="btn number" data-value="3">3</button>
+<button class="btn operator" data-value="+">+</button>
+<button class="btn number zero" data-value="0">0</button>
+<button class="btn number" data-value=".">.</button>
+<button class="btn equals" data-action="equals">=</button>
+</div>
+</div>
+<div id="ai-response" class="ai-response"></div>
+</div>
+<div class="background-gradient"></div>
+<script src="calculator.js"></script>
+</body>
+</html>
