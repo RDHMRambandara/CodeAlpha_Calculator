@@ -362,25 +362,35 @@ this.voiceBtn.classList.remove('processing');
 }
 
 calculateFromText(text) {
-const cleanText = text.toLowerCase().replace(/[^\d\s+\-*/%.()=]/g, '');
+    // check for "X% of Y" pattern
+    const percentMatch = text.toLowerCase().match(/(\d+(?:\.\d+)?)\s*%\s*of\s*(\d+(?:\.\d+)?)/);
+    if (percentMatch) {
+        const percentage = parseFloat(percentMatch[1]);
+        const number = parseFloat(percentMatch[2]);
+        return (percentage / 100) * number;
+    }
 
-const mathExpression = cleanText
-.replace(/plus/g, '+')
-.replace(/minus/g, '-')
-.replace(/times/g, '*')
-.replace(/multiply/g, '*')
-.replace(/divided by/g, '/')
-.replace(/divide/g, '/')
-.replace(/percent/g, '%')
-.replace(/equals/g, '=');
+    // normal math expression parsing
+    const cleanText = text.toLowerCase().replace(/[^\d\s+\-*/%.()=]/g, '');
 
-try {
-const result = Function('"use strict"; return (' + mathExpression.replace(/=/g, '') + ')')();
-return isFinite(result) ? result : null;
-} catch (e) {
-return null;
+    const mathExpression = cleanText
+        .replace(/plus/g, '+')
+        .replace(/minus/g, '-')
+        .replace(/times/g, '*')
+        .replace(/multiply/g, '*')
+        .replace(/divided by/g, '/')
+        .replace(/divide/g, '/')
+        .replace(/percent/g, '%')
+        .replace(/equals/g, '=');
+
+    try {
+        const result = Function('"use strict"; return (' + mathExpression.replace(/=/g, '') + ')')();
+        return isFinite(result) ? result : null;
+    } catch (e) {
+        return null;
+    }
 }
-}
+
 }
 
 const calculator = new Calculator();
@@ -545,4 +555,5 @@ return isFinite(result) ? result : null;
 return null;
 }
 }
+
 });
